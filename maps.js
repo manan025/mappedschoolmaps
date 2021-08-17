@@ -92,27 +92,43 @@ const geojson = {
                 title: 'User',
                 name: 'marker',
                 description: 'You are here.',
-                available: 2,
-                total: 10
+                available: "you",
+                total: "you"
             }
         }
         ]
 };
 
-map.on('load', () => {
-    map.addSource('route', {
-        'type': 'geojson',
-        'data': {
+const line = {
+    'type': 'FeatureCollection',
+    'features': [
+        {
             'type': 'Feature',
-            'properties': {},
             'geometry': {
                 'type': 'lineString',
                 'coordinates': [
-                    [-25.430603027343746, 12.901505084198375],
-                    [-25.982666015625, 12.621577527694]
+                    [
+                        -25.430603027343746,
+                        12.901505084198375
+                    ],
+                    [
+                        -25.250701904296875,
+                        12.902843703352639
+                    ],
+                    [
+                        -25.149078369140625,
+                        13.007233869059881
+                    ]
                 ]
             }
         }
+    ]
+}
+
+map.on('load', () => {
+    map.addSource('route', {
+        'type': 'geojson',
+        'data': line
     });
     map.addLayer({
         'id': 'route',
@@ -123,7 +139,7 @@ map.on('load', () => {
             'line-cap': 'round'
         },
         'paint': {
-            'line-color': '#fff',
+            'line-color': '#21FFBD',
             'line-width': 10
         }
     });
