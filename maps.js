@@ -169,11 +169,14 @@ const geojson = {
 // }
 
 // add markers to map
+var i = 0;
 geojson.features.forEach(function(marker) {
 
     // create a HTML element for each feature
     var el = document.createElement('img')
     el.className = 'marker';
+    el.id = `marker${i}`
+    i += 1
     el.src = `assets/${marker.properties.name}.png`
     // make a marker for each feature and add to the map
     new mapboxgl.Marker(el)
@@ -183,5 +186,5 @@ geojson.features.forEach(function(marker) {
         .addTo(map);
 });
 
-document.getElementsByClassName('marker').addEventListener("click", loadline)
+document.getElementById('marker1').addEventListener("click", loadline)
 
