@@ -6,6 +6,7 @@ var map = new mapboxgl.Map({
     center: [-25.5707, 12.9115],
     zoom: 9
 });
+
 function loadline() {
     map.on('click', () => {
         map.addSource('route', {
@@ -45,6 +46,7 @@ function loadline() {
             }
         });
     });
+    markers();
 }
 
 function loadCourt() {
@@ -83,6 +85,7 @@ function loadCourt() {
             }
         });
     });
+    markers();
 }
 
 function loadHospital() {
@@ -117,6 +120,7 @@ function loadHospital() {
             }
         });
     });
+    markers();
 }
 
 function loadATM() {
@@ -151,6 +155,7 @@ function loadATM() {
             }
         });
     });
+    markers();
 }
 
 const user = [-25.6, 12.901505084198375];
@@ -275,22 +280,26 @@ const geojson = {
 // }
 
 // add markers to map
-let i = 0;
-geojson.features.forEach(function(marker) {
+function markers() {
+    let i = 0;
+    geojson.features.forEach(function (marker) {
 
-    // create a HTML element for each feature
-    var el = document.createElement('img')
-    el.className = 'marker';
-    el.id = `marker${i}`;
-    i += 1;
-    el.src = `assets/${marker.properties.name}.png`;
-    // make a marker for each feature and add to the map
-    new mapboxgl.Marker(el)
-        .setLngLat(marker.geometry.coordinates)
-        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-            .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</br>' + marker.properties.available + " available present out of " + marker.properties.total + '</p>'))
-        .addTo(map);
-});
+        // create a HTML element for each feature
+        var el = document.createElement('img')
+        el.className = 'marker';
+        el.id = `marker${i}`;
+        i += 1;
+        el.src = `assets/${marker.properties.name}.png`;
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
+                .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</br>' + marker.properties.available + " available present out of " + marker.properties.total + '</p>'))
+            .addTo(map);
+    });
+}
+
+markers()
 
 // Washroom
 document.getElementById('marker1').addEventListener("click", loadline);
