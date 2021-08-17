@@ -7,6 +7,45 @@ var map = new mapboxgl.Map({
     zoom: 9
 });
 
+map.on('load', () => {
+    map.addSource('route', {
+        'type': 'geojson',
+        'data': {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': [
+                    [
+                        -25.6, 12.901505084198375
+                    ],
+                    [
+                        -25.250701904296875,
+                        12.902843703352639
+                    ],
+                    [
+                         -25.149078369140625,
+                         13.007233869059881
+                     ]
+                ]
+            }
+        }
+    });
+    map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+        'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#21FFBD',
+            'line-width': 8
+        }
+    });
+});
+
 const user = [-25.6, 12.901505084198375];
 
 const geojson = {
@@ -99,51 +138,34 @@ const geojson = {
         ]
 };
 
-const line = {
-    'type': 'FeatureCollection',
-    'features': [
-        {
-            'type': 'Feature',
-            'geometry': {
-                'type': 'lineString',
-                'coordinates': [
-                    [
-                        -25.430603027343746,
-                        12.901505084198375
-                    ],
-                    [
-                        -25.250701904296875,
-                        12.902843703352639
-                    ],
-                    [
-                        -25.149078369140625,
-                        13.007233869059881
-                    ]
-                ]
-            }
-        }
-    ]
-}
-
-map.on('load', () => {
-    map.addSource('route', {
-        'type': 'geojson',
-        'data': line
-    });
-    map.addLayer({
-        'id': 'route',
-        'type': 'line',
-        'source': 'route',
-        'layout': {
-            'line-join': 'round',
-            'line-cap': 'round'
-        },
-        'paint': {
-            'line-color': '#21FFBD',
-            'line-width': 10
-        }
-    });
-});
+// const line = {
+//     'type': 'FeatureCollection',
+//     'features': [
+//         {
+//             'type': 'Feature',
+//             'properties': {
+//                 'title': 'Best Path'
+//             },
+//             'geometry': {
+//                 'type': 'lineString',
+//                 'coordinates': [
+//                     [
+//                         -25.430603027343746,
+//                         12.901505084198375
+//                     ],
+//                     [
+//                         -25.250701904296875,
+//                         12.902843703352639
+//                     ],
+//                     [
+//                         -25.149078369140625,
+//                         13.007233869059881
+//                     ]
+//                 ]
+//             }
+//         }
+//     ]
+// }
 
 // add markers to map
 geojson.features.forEach(function(marker) {
