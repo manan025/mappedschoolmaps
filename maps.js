@@ -6,45 +6,46 @@ var map = new mapboxgl.Map({
     center: [-25.5707, 12.9115],
     zoom: 9
 });
-
-map.on('load', () => {
-    map.addSource('route', {
-        'type': 'geojson',
-        'data': {
-            'type': 'Feature',
-            'properties': {},
-            'geometry': {
-                'type': 'LineString',
-                'coordinates': [
-                    [
-                        -25.6, 12.901505084198375
-                    ],
-                    [
-                        -25.250701904296875,
-                        12.902843703352639
-                    ],
-                    [
-                         -25.149078369140625,
-                         13.007233869059881
-                     ]
-                ]
+function loadline() {
+    map.on('click', () => {
+        map.addSource('route', {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
+                        [
+                            -25.6, 12.901505084198375
+                        ],
+                        [
+                            -25.250701904296875,
+                            12.902843703352639
+                        ],
+                        [
+                            -25.149078369140625,
+                            13.007233869059881
+                        ]
+                    ]
+                }
             }
-        }
+        });
+        map.addLayer({
+            'id': 'route',
+            'type': 'line',
+            'source': 'route',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            'paint': {
+                'line-color': '#21FFBD',
+                'line-width': 8
+            }
+        });
     });
-    map.addLayer({
-        'id': 'route',
-        'type': 'line',
-        'source': 'route',
-        'layout': {
-            'line-join': 'round',
-            'line-cap': 'round'
-        },
-        'paint': {
-            'line-color': '#21FFBD',
-            'line-width': 8
-        }
-    });
-});
+}
 
 const user = [-25.6, 12.901505084198375];
 
@@ -181,3 +182,6 @@ geojson.features.forEach(function(marker) {
             .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</br>' + marker.properties.available + " available present out of " + marker.properties.total + '</p>'))
         .addTo(map);
 });
+
+document.getElementsByClassName('marker').addEventListener("click", loadline)
+
