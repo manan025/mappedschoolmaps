@@ -88,7 +88,7 @@ function loadCourt() {
     });
 }
 
-function loadHospital() {
+function loadAuditorium() {
     map.on('click', () => {
         map.addSource('route', {
             'type': 'geojson',
@@ -122,7 +122,7 @@ function loadHospital() {
     });
 }
 
-function loadATM() {
+function loadClass() {
     map.on('click', () => {
         map.addSource('route', {
             'type': 'geojson',
@@ -196,11 +196,11 @@ const geojson = {
                 coordinates: [-25.147705078125, 12.758231584069796]
             },
             properties: {
-                title: 'ATM',
-                name: 'bank',
-                description: 'Short on money? Withdraw here!',
-                available: 1,
-                total: 1
+                title: 'Class F22',
+                name: 'Class',
+                description: 'Classes going here',
+                available: 35,
+                total: 2
             }
         },
         {
@@ -224,11 +224,11 @@ const geojson = {
                 coordinates: [-25.746459960937496, 12.585392141908478]
             },
             properties: {
-                title: 'Hospital',
-                name: 'hospital',
-                description: 'Get yourself checked here!',
-                available: 2,
-                total: 10
+                title: 'Auditorium',
+                name: 'Auditorium',
+                description: 'Enjoy here!',
+                available: 100,
+                total: 250
             }
         },
         {
@@ -296,15 +296,12 @@ geojson.features.forEach(function (marker) {
         .addTo(map);
 });
 
-// Washroom
 document.getElementById('marker1').addEventListener("click", loadline);
+
 document.getElementById('marker3').addEventListener("click", loadline);
 
-// Food Court
 document.getElementById('marker0').addEventListener("click", loadCourt);
 
-// Hospital
-document.getElementById('marker4').addEventListener('click', loadHospital);
+document.getElementById('marker4').addEventListener('click', loadAuditorium);
 
-// ATM
-document.getElementById('marker2').addEventListener('click', loadATM);
+document.getElementById('marker2').addEventListener('click', loadClass);
