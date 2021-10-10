@@ -197,7 +197,7 @@ const geojson = {
             },
             properties: {
                 title: 'Class F22',
-                name: 'Class',
+                name: 'class',
                 description: 'Classes going here',
                 available: 35,
                 total: 2
@@ -225,7 +225,7 @@ const geojson = {
             },
             properties: {
                 title: 'Auditorium',
-                name: 'Auditorium',
+                name: 'auditorium',
                 description: 'Enjoy here!',
                 available: 100,
                 total: 250
